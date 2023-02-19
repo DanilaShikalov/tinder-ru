@@ -2,6 +2,8 @@ package com.example.digitalproject.services.servicesImpl;
 
 import com.example.digitalproject.mappers.StudentMapper;
 import com.example.digitalproject.models.dto.students.*;
+import com.example.digitalproject.models.entities.Student;
+import com.example.digitalproject.repositories.DocumentRepository;
 import com.example.digitalproject.repositories.StudentRepository;
 import com.example.digitalproject.services.StudentService;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
+    private DocumentRepository documentRepository;
+    @Override
+    public void addDocumentsToStudent(Long idStudent, Long idsDocument) {
+        Student student = studentRepository.findById(idStudent).orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
+        student.getDocuments().add(documentRepository.findById(idsDocument).orElseThrow(() -> new ResponseStatusException(NOT_FOUND)));
+        studentRepository.save(student);
+    }
 
     @Override
     public StudentGetDTO getStudent(Long id) {
@@ -25,7 +34,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void postStudent(StudentPostDTO studentPostDTO) {
-        studentRepository.save(studentMapper.postToEntity(studentPostDTO));
+//        Student student = studentRepository.save(studentMapper.postToEntity(studentPostDTO));
+        Student student = studentMapper.postToEntity(studentPostDTO);
+        if (studentPostDTO.getDocument_ids() != null) {
+            studentPostDTO.getDocument_ids().forEach(x -> student.getDocuments().add(documentRepository.findById(x).orElseThrow(() -> new ResponseStatusException(NOT_FOUND))));
+        }
+        studentRepository.save(student);
     }
 
     @Override

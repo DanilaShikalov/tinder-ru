@@ -14,4 +14,6 @@ public interface StudentService {
     void putStudent(StudentPutDTO StudentPutDTO);
 
     List<StudentGetDTO> getAllStudents();
+
+    void addDocumentsToStudent(Long idStudent, Long idsDocument);
 }

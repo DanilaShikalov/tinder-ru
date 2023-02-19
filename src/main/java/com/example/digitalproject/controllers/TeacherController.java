@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v4")
+@RequestMapping("api/teachers")
 @AllArgsConstructor
 public class TeacherController {
     private TeacherService teacherService;
 
-    @GetMapping("teachers/{id}")
+    @GetMapping("/teacher/{id}")
     public TeacherGetDTO getTeacher(@PathVariable Long id) {
         return teacherService.getTeacher(id);
     }
 
-    @PostMapping("teachers/")
+    @PostMapping("/teacher/")
     public ResponseEntity<?> postTeacher(TeacherPostDTO teacherPostDTO) {
         teacherService.postTeacher(teacherPostDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("teachers/{id}")
+    @DeleteMapping("/teacher/{id}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Long id) {
         teacherService.deleteTeacher(id);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("teachers/")
+    @PutMapping("/teacher/")
     public ResponseEntity<?> putTeacher(TeacherPutDTO teacherPutDTO) {
         teacherService.putTeacher(teacherPutDTO);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("teachers/")
+    @GetMapping("/teacher/")
     public List<TeacherGetDTO> getAllTeachers() {
         return teacherService.getAllTeachers();
     }

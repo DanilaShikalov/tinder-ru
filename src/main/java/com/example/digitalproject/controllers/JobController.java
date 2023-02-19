@@ -8,35 +8,36 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/v2")
+@RestController
+@RequestMapping("api/jobs")
 @AllArgsConstructor
 public class JobController {
     private JobService jobService;
 
-    @GetMapping("/jobs/{id}")
+    @GetMapping("/job/{id}")
     public JobGetDTO getJob(@PathVariable Long id) {
         return jobService.getJob(id);
     }
 
-    @PostMapping("/jobs")
+    @PostMapping("/job/")
     public ResponseEntity<?> postJob(JobPostDTO JobPostDTO) {
         jobService.postJob(JobPostDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/jobs/{id}")
+    @DeleteMapping("/job/{id}")
     public ResponseEntity<?> deleteJob(@PathVariable Long id) {
         jobService.deleteJob(id);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/jobs")
+    @PutMapping("/job/")
     public ResponseEntity<?> putJob(JobPutDTO JobPutDTO) {
         jobService.putJob(JobPutDTO);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/jobs")
+    @GetMapping("/job/")
     public List<JobGetDTO> getAllJobs() {
         return jobService.getAllJobs();
     }

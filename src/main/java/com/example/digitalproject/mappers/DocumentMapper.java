@@ -10,8 +10,8 @@ import java.util.List;
 @Component
 @Mapper(componentModel = "spring")
 public interface DocumentMapper {
-    DocumentGetDTO entityToGet(Document student);
-    Document postToEntity(DocumentPostDTO studentPostDTO);
-    Document putToEntity(DocumentPutDTO studentPutDTO);
+    DocumentGetDTO entityToGet(Document document);
+    Document postToEntity(DocumentPostDTO documentPostDTO);
+    Document putToEntity(DocumentPutDTO documentPutDTO);
     List<DocumentGetDTO> getAllDocuments(List<Document> documents);
 }

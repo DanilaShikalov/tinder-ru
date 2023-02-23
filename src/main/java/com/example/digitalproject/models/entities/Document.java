@@ -1,7 +1,9 @@
 package com.example.digitalproject.models.entities;
 
-import javax.persistence.*;
+
 import lombok.*;
+
+import javax.persistence.*;
 
 @Data
 @Entity

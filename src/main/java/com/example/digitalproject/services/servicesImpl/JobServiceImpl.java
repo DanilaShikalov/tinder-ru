@@ -5,6 +5,8 @@ import com.example.digitalproject.models.dto.jobs.*;
 import com.example.digitalproject.repositories.JobRepository;
 import com.example.digitalproject.services.JobService;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +16,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class JobServiceImpl implements JobService {
     private JobRepository jobRepository;
     private JobMapper jobMapper;
@@ -25,6 +28,8 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void postJob(JobPostDTO jobPostDTO) {
+        log.info(jobPostDTO.toString());
+        log.info(jobMapper.postToEntity(jobPostDTO).toString());
         jobRepository.save(jobMapper.postToEntity(jobPostDTO));
     }
 

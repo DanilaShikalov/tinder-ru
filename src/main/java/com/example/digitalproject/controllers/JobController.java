@@ -20,7 +20,7 @@ public class JobController {
     }
 
     @PostMapping("/job/")
-    public ResponseEntity<?> postJob(JobPostDTO JobPostDTO) {
+    public ResponseEntity<?> postJob(@RequestBody JobPostDTO JobPostDTO) {
         jobService.postJob(JobPostDTO);
         return ResponseEntity.ok().build();
     }
@@ -32,7 +32,7 @@ public class JobController {
     }
 
     @PutMapping("/job/")
-    public ResponseEntity<?> putJob(JobPutDTO JobPutDTO) {
+    public ResponseEntity<?> putJob(@RequestBody JobPutDTO JobPutDTO) {
         jobService.putJob(JobPutDTO);
         return ResponseEntity.ok().build();
     }

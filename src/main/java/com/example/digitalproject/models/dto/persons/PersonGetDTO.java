@@ -1,4 +1,4 @@
-package com.example.digitalproject.models.dto.students;
+package com.example.digitalproject.models.dto.persons;
 
 import com.example.digitalproject.models.dto.documents.DocumentGetDTO;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentGetDTO {
+public class PersonGetDTO {
     private Long id;
     private String name;
     private String surname;

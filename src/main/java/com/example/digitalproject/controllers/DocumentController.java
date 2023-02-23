@@ -21,7 +21,7 @@ public class DocumentController {
     }
 
     @PostMapping("/document/")
-    public ResponseEntity<?> postDocument(DocumentPostDTO DocumentPostDTO) {
+    public ResponseEntity<?> postDocument(@RequestBody DocumentPostDTO DocumentPostDTO) {
         documentService.postDocument(DocumentPostDTO);
         return ResponseEntity.ok().build();
     }
@@ -33,7 +33,7 @@ public class DocumentController {
     }
 
     @PutMapping("/document/")
-    public ResponseEntity<?> putDocument(DocumentPutDTO DocumentPutDTO) {
+    public ResponseEntity<?> putDocument(@RequestBody DocumentPutDTO DocumentPutDTO) {
         documentService.putDocument(DocumentPutDTO);
         return ResponseEntity.ok().build();
     }

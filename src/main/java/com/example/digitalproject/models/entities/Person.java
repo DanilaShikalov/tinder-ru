@@ -13,15 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Teacher {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String surname;
     private String phone;
-    @OneToOne
-    private Job job;
+    private String number;
     @OneToMany
     private List<Document> documents;
 }

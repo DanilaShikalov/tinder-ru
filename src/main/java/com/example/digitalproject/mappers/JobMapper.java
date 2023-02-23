@@ -10,8 +10,8 @@ import java.util.List;
 @Component
 @Mapper(componentModel = "spring")
 public interface JobMapper {
-    JobGetDTO entityToGet(Job student);
-    Job postToEntity(JobPostDTO studentPostDTO);
-    Job putToEntity(JobPutDTO studentPutDTO);
+    JobGetDTO entityToGet(Job job);
+    Job postToEntity(JobPostDTO jobPostDTO);
+    Job putToEntity(JobPutDTO jobPutDTO);
     List<JobGetDTO> getAllJobs(List<Job> Jobs);
 }

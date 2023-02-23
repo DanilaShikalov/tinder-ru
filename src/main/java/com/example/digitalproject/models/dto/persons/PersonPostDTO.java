@@ -1,4 +1,4 @@
-package com.example.digitalproject.models.dto.teachers;
+package com.example.digitalproject.models.dto.persons;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherPostDTO {
+public class PersonPostDTO {
     private String name;
     private String surname;
     private String phone;
+    private String number;
 }

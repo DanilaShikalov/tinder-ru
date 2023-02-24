@@ -20,14 +20,14 @@ public class PersonController {
     }
 
     @PostMapping("/person/")
-    public ResponseEntity<?> postPerson(@RequestBody PersonPostDTO PersonPostDTO) {
-        personService.postEntity(PersonPostDTO);
+    public ResponseEntity<?> postPerson(@RequestBody PersonPostDTO personPostDTO, @RequestParam Long idJob) {
+        personService.postEntity(personPostDTO, idJob);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/person/adddocs")
-    public ResponseEntity<?> addDocsToPerson(@RequestParam Long idPerson, @RequestParam Long idsDocument) {
-        personService.addDocumentsToPerson(idPerson, idsDocument);
+    @PostMapping("/person/addsub")
+    public ResponseEntity<?> addSub(@RequestParam Long idPerson, Long idSubject) {
+        personService.addSubjectsToPerson(idPerson, idSubject);
         return ResponseEntity.ok().build();
     }
 
@@ -38,8 +38,8 @@ public class PersonController {
     }
 
     @PutMapping("/person/")
-    public ResponseEntity<?> putPerson(@RequestBody PersonPutDTO PersonPutDTO) {
-        personService.putEntity(PersonPutDTO);
+    public ResponseEntity<?> putPerson(@RequestBody PersonPutDTO personPutDTO, @RequestParam Long id) {
+        personService.putEntity(personPutDTO, id);
         return ResponseEntity.ok().build();
     }
 

@@ -7,11 +7,13 @@ import java.util.List;
 public interface AnswerService {
     AnswerGetDTO getEntity(Long id);
 
-    void postEntity(AnswerPostDTO postDTO);
+    void postEntity(AnswerPostDTO postDTO, Long idPerson, Long idTask);
 
     void deleteEntity(Long id);
 
-    void putEntity(AnswerPutDTO putDTO);
+    void putEntity(AnswerPutDTO putDTO, Long id);
 
     List<AnswerGetDTO> getAllEntities();
+
+    List<AnswerDefaultGetDTO> getAllAnswersWithTask();
 }

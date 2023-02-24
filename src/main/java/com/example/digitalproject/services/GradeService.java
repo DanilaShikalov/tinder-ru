@@ -7,11 +7,11 @@ import java.util.List;
 public interface GradeService {
     GradeGetDTO getEntity(Long id);
 
-    void postEntity(GradePostDTO postDTO);
+    void postEntity(GradePostDTO postDTO, Long idAnswer);
 
     void deleteEntity(Long id);
 
-    void putEntity(GradePutDTO putDTO);
+    void putEntity(GradePutDTO putDTO, Long id);
 
     List<GradeGetDTO> getAllEntities();
 }

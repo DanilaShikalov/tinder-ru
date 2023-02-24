@@ -22,8 +22,8 @@ public class GradeController {
     }
 
     @PostMapping("/grade/")
-    public ResponseEntity<?> postGrade(@RequestBody GradePostDTO GradePostDTO) {
-        gradeService.postEntity(GradePostDTO);
+    public ResponseEntity<?> postGrade(@RequestBody GradePostDTO gradePostDTO, @RequestParam Long idAnswer) {
+        gradeService.postEntity(gradePostDTO, idAnswer);
         return ResponseEntity.ok().build();
     }
 
@@ -34,8 +34,8 @@ public class GradeController {
     }
 
     @PutMapping("/grade/")
-    public ResponseEntity<?> putGrade(@RequestBody GradePutDTO GradePutDTO) {
-        gradeService.putEntity(GradePutDTO);
+    public ResponseEntity<?> putGrade(@RequestBody GradePutDTO gradePutDTO, @RequestParam Long id) {
+        gradeService.putEntity(gradePutDTO, id);
         return ResponseEntity.ok().build();
     }
 

@@ -11,7 +11,9 @@ public interface SubjectService {
 
     void deleteEntity(Long id);
 
-    void putEntity(SubjectPutDTO putDTO);
+    void putEntity(SubjectPutDTO putDTO, Long id);
 
     List<SubjectGetDTO> getAllEntities();
+
+    List<SubjectWithTasksGetDTO> getAllSubjectsWithTasks();
 }

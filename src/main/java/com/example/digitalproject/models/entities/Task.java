@@ -16,12 +16,13 @@ import java.util.List;
 @Builder
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String task;
     private LocalDate dateStart;
     private LocalDate dateEnd;
-    @OneToMany
-    @JoinColumn(name = "task_id")
+    @OneToMany(mappedBy = "task")
     private List<Answer> answers;
+    @ManyToOne
+    private Subject subject;
 }

@@ -1,6 +1,7 @@
 package com.example.digitalproject.models.dto.persons;
 
 import com.example.digitalproject.models.dto.documents.DocumentGetDTO;
+import com.example.digitalproject.models.dto.jobs.JobGetDTO;
 import lombok.*;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public class PersonGetDTO {
     private String phone;
     private String number;
     private List<DocumentGetDTO> documents;
+    private JobGetDTO job;
 }

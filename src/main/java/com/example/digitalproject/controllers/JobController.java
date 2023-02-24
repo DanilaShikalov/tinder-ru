@@ -20,8 +20,8 @@ public class JobController {
     }
 
     @PostMapping("/job/")
-    public ResponseEntity<?> postJob(@RequestBody JobPostDTO JobPostDTO) {
-        jobService.postEntity(JobPostDTO);
+    public ResponseEntity<?> postJob(@RequestBody JobPostDTO jobPostDTO) {
+        jobService.postEntity(jobPostDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -32,8 +32,8 @@ public class JobController {
     }
 
     @PutMapping("/job/")
-    public ResponseEntity<?> putJob(@RequestBody JobPutDTO JobPutDTO) {
-        jobService.putEntity(JobPutDTO);
+    public ResponseEntity<?> putJob(@RequestBody JobPutDTO jobPutDTO, @RequestParam Long id) {
+        jobService.putEntity(jobPutDTO, id);
         return ResponseEntity.ok().build();
     }
 

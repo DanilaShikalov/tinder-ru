@@ -7,13 +7,13 @@ import java.util.List;
 public interface PersonService {
     PersonGetDTO getEntity(Long id);
 
-    void postEntity(PersonPostDTO postDTO);
+    void postEntity(PersonPostDTO postDTO, Long idJob);
 
     void deleteEntity(Long id);
 
-    void putEntity(PersonPutDTO putDTO);
+    void putEntity(PersonPutDTO putDTO, Long id);
 
     List<PersonGetDTO> getAllEntities();
 
-    void addDocumentsToPerson(Long idPerson, Long idsDocument);
+    void addSubjectsToPerson(Long idPerson, Long idSubject);
 }

@@ -12,7 +12,7 @@ public interface JobService {
 
     void deleteEntity(Long id);
 
-    void putEntity(JobPutDTO putDTO);
+    void putEntity(JobPutDTO putDTO, Long id);
 
     List<JobGetDTO> getAllEntities();
 }

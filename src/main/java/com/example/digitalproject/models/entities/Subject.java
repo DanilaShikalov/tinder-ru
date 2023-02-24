@@ -15,10 +15,9 @@ import java.util.List;
 @Builder
 public class Subject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
-    @JoinColumn(name = "subject_id")
+    @OneToMany(mappedBy = "subject")
     private List<Task> tasks;
 }

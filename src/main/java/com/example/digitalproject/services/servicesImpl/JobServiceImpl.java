@@ -2,6 +2,7 @@ package com.example.digitalproject.services.servicesImpl;
 
 import com.example.digitalproject.mappers.JobMapper;
 import com.example.digitalproject.models.dto.jobs.*;
+import com.example.digitalproject.models.entities.Job;
 import com.example.digitalproject.repositories.JobRepository;
 import com.example.digitalproject.services.JobService;
 import lombok.AllArgsConstructor;
@@ -27,8 +28,6 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void postEntity(JobPostDTO jobPostDTO) {
-        log.info(jobPostDTO.toString());
-        log.info(jobMapper.postToEntity(jobPostDTO).toString());
         jobRepository.save(jobMapper.postToEntity(jobPostDTO));
     }
 
@@ -38,8 +37,10 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void putEntity(JobPutDTO jobPutDTO) {
-        jobRepository.save(jobMapper.putToEntity(jobPutDTO));
+    public void putEntity(JobPutDTO jobPutDTO, Long id) {
+        Job job = jobMapper.putToEntity(jobPutDTO);
+        job.setId(id);
+        jobRepository.save(job);
     }
 
     @Override

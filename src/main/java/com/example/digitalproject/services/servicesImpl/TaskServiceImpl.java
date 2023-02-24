@@ -2,6 +2,8 @@ package com.example.digitalproject.services.servicesImpl;
 
 import com.example.digitalproject.mappers.TaskMapper;
 import com.example.digitalproject.models.dto.tasks.*;
+import com.example.digitalproject.models.entities.Task;
+import com.example.digitalproject.repositories.SubjectRepository;
 import com.example.digitalproject.repositories.TaskRepository;
 import com.example.digitalproject.services.TaskService;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     private TaskMapper taskMapper;
+    private SubjectRepository subjectRepository;
 
     @Override
     public TaskGetDTO getEntity(Long id) {
@@ -24,8 +27,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void postEntity(TaskPostDTO TaskPostDTO) {
-        taskRepository.save(taskMapper.postToEntity(TaskPostDTO));
+    public void postEntity(TaskPostDTO taskPostDTO, Long idSubject) {
+        Task task = taskMapper.postToEntity(taskPostDTO);
+        task.setSubject(subjectRepository.findById(idSubject).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Subject не найден")));
+        taskRepository.save(task);
     }
 
     @Override
@@ -34,8 +39,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void putEntity(TaskPutDTO TaskPutDTO) {
-        taskRepository.save(taskMapper.putToEntity(TaskPutDTO));
+    public void putEntity(TaskPutDTO taskPutDTO, Long id) {
+        Task task = taskMapper.putToEntity(taskPutDTO);
+        task.setId(id);
+        taskRepository.save(task);
     }
 
     @Override

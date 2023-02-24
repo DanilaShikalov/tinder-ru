@@ -14,11 +14,10 @@ import javax.persistence.*;
 @Builder
 public class Grade {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String grade;
     private String description;
-    @OneToOne
-    @JoinColumn(name = "answer_id")
+    @OneToOne(fetch = FetchType.LAZY)
     private Answer answer;
 }

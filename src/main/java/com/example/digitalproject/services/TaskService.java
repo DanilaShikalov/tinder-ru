@@ -8,11 +8,11 @@ import java.util.List;
 public interface TaskService {
     TaskGetDTO getEntity(Long id);
 
-    void postEntity(TaskPostDTO postDTO);
+    void postEntity(TaskPostDTO postDTO, Long idSubject);
 
     void deleteEntity(Long id);
 
-    void putEntity(TaskPutDTO putDTO);
+    void putEntity(TaskPutDTO putDTO, Long id);
 
     List<TaskGetDTO> getAllEntities();
 }

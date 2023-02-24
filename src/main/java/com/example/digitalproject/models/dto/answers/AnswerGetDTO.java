@@ -1,6 +1,8 @@
 package com.example.digitalproject.models.dto.answers;
 
+import com.example.digitalproject.models.dto.grades.GradeDefaultGetDTO;
 import com.example.digitalproject.models.dto.grades.GradeGetDTO;
+import com.example.digitalproject.models.dto.persons.PersonDefaultGetDTO;
 import com.example.digitalproject.models.dto.persons.PersonGetDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,6 @@ public class AnswerGetDTO {
     private Long id;
     private LocalDate date;
     private String mongoId;
-    private PersonGetDTO person;
-    private GradeGetDTO grade;
+    private PersonDefaultGetDTO person;
+    private GradeDefaultGetDTO grade;
 }

@@ -14,4 +14,6 @@ public interface SubjectMapper {
     Subject postToEntity(SubjectPostDTO postDTO);
     Subject putToEntity(SubjectPutDTO putDTO);
     List<SubjectGetDTO> getAll(List<Subject> list);
+
+    List<SubjectWithTasksGetDTO> getAllSubjectsWithTasks(List<Subject> list);
 }

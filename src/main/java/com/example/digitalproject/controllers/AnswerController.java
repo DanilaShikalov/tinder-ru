@@ -20,8 +20,8 @@ public class AnswerController {
     }
 
     @PostMapping("/answer/")
-    public ResponseEntity<?> postAnswer(@RequestBody AnswerPostDTO AnswerPostDTO) {
-        answerService.postEntity(AnswerPostDTO);
+    public ResponseEntity<?> postAnswer(@RequestBody AnswerPostDTO answerPostDTO, @RequestParam Long idPerson, @RequestParam Long idTask) {
+        answerService.postEntity(answerPostDTO, idPerson, idTask);
         return ResponseEntity.ok().build();
     }
 
@@ -32,13 +32,18 @@ public class AnswerController {
     }
 
     @PutMapping("/answer/")
-    public ResponseEntity<?> putAnswer(@RequestBody AnswerPutDTO AnswerPutDTO) {
-        answerService.putEntity(AnswerPutDTO);
+    public ResponseEntity<?> putAnswer(@RequestBody AnswerPutDTO answerPutDTO, @RequestParam Long id) {
+        answerService.putEntity(answerPutDTO, id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/answer/")
     public List<AnswerGetDTO> getAllAnswers() {
         return answerService.getAllEntities();
+    }
+
+    @GetMapping("/answer/allwithtask")
+    public List<AnswerDefaultGetDTO> getAllAnswersWithTask() {
+        return answerService.getAllAnswersWithTask();
     }
 }

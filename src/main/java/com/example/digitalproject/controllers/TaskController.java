@@ -22,8 +22,8 @@ public class TaskController {
     }
 
     @PostMapping("/task/")
-    public ResponseEntity<?> postTask(@RequestBody TaskPostDTO TaskPostDTO) {
-        taskService.postEntity(TaskPostDTO);
+    public ResponseEntity<?> postTask(@RequestBody TaskPostDTO taskPostDTO, @RequestParam Long idSubject) {
+        taskService.postEntity(taskPostDTO, idSubject);
         return ResponseEntity.ok().build();
     }
 
@@ -34,8 +34,8 @@ public class TaskController {
     }
 
     @PutMapping("/task/")
-    public ResponseEntity<?> putTask(@RequestBody TaskPutDTO TaskPutDTO) {
-        taskService.putEntity(TaskPutDTO);
+    public ResponseEntity<?> putTask(@RequestBody TaskPutDTO taskPutDTO, @RequestParam Long id) {
+        taskService.putEntity(taskPutDTO, id);
         return ResponseEntity.ok().build();
     }
 

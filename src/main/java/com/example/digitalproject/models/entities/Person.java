@@ -1,10 +1,8 @@
 package com.example.digitalproject.models.entities;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 import java.util.List;
 
@@ -13,9 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
@@ -24,8 +23,8 @@ public class Person {
     @OneToMany
     @JoinColumn(name = "person_id")
     private List<Document> documents;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Subject> subjects;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Job job;
 }

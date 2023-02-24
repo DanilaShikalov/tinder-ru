@@ -2,6 +2,7 @@ package com.example.digitalproject.services.servicesImpl;
 
 import com.example.digitalproject.mappers.SubjectMapper;
 import com.example.digitalproject.models.dto.subjects.*;
+import com.example.digitalproject.models.entities.Subject;
 import com.example.digitalproject.repositories.SubjectRepository;
 import com.example.digitalproject.services.SubjectService;
 import lombok.AllArgsConstructor;
@@ -24,8 +25,8 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void postEntity(SubjectPostDTO SubjectPostDTO) {
-        subjectRepository.save(subjectMapper.postToEntity(SubjectPostDTO));
+    public void postEntity(SubjectPostDTO subjectPostDTO) {
+        subjectRepository.save(subjectMapper.postToEntity(subjectPostDTO));
     }
 
     @Override
@@ -34,12 +35,19 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void putEntity(SubjectPutDTO SubjectPutDTO) {
-        subjectRepository.save(subjectMapper.putToEntity(SubjectPutDTO));
+    public void putEntity(SubjectPutDTO subjectPutDTO, Long id) {
+        Subject subject = subjectMapper.putToEntity(subjectPutDTO);
+        subject.setId(id);
+        subjectRepository.save(subject);
     }
 
     @Override
     public List<SubjectGetDTO> getAllEntities() {
         return subjectMapper.getAll(subjectRepository.findAll());
+    }
+
+    @Override
+    public List<SubjectWithTasksGetDTO> getAllSubjectsWithTasks() {
+        return subjectMapper.getAllSubjectsWithTasks(subjectRepository.findAll());
     }
 }

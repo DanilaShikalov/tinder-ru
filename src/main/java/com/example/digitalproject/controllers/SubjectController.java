@@ -3,6 +3,7 @@ package com.example.digitalproject.controllers;
 import com.example.digitalproject.models.dto.subjects.SubjectGetDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectPostDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectPutDTO;
+import com.example.digitalproject.models.dto.subjects.SubjectWithTasksGetDTO;
 import com.example.digitalproject.services.SubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class SubjectController {
     }
 
     @PostMapping("/subject/")
-    public ResponseEntity<?> postSubject(@RequestBody SubjectPostDTO SubjectPostDTO) {
-        subjectService.postEntity(SubjectPostDTO);
+    public ResponseEntity<?> postSubject(@RequestBody SubjectPostDTO subjectPostDTO) {
+        subjectService.postEntity(subjectPostDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -34,13 +35,18 @@ public class SubjectController {
     }
 
     @PutMapping("/subject/")
-    public ResponseEntity<?> putSubject(@RequestBody SubjectPutDTO SubjectPutDTO) {
-        subjectService.putEntity(SubjectPutDTO);
+    public ResponseEntity<?> putSubject(@RequestBody SubjectPutDTO subjectPutDTO, @RequestParam Long id) {
+        subjectService.putEntity(subjectPutDTO, id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/subject/")
     public List<SubjectGetDTO> getAllSubjects() {
         return subjectService.getAllEntities();
+    }
+
+    @GetMapping("/subject/all")
+    public List<SubjectWithTasksGetDTO> getAllSubjectsWithTasks() {
+        return subjectService.getAllSubjectsWithTasks();
     }
 }

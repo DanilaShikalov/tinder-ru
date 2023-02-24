@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Builder
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
     private String mongoId;
@@ -23,4 +23,6 @@ public class Answer {
     private Person person;
     @OneToOne(mappedBy = "answer")
     private Grade grade;
+    @ManyToOne
+    private Task task;
 }

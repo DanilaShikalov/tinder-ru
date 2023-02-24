@@ -16,12 +16,12 @@ public class PersonController {
 
     @GetMapping("/person/{id}")
     public PersonGetDTO getPerson(@PathVariable Long id) {
-        return personService.getPerson(id);
+        return personService.getEntity(id);
     }
 
     @PostMapping("/person/")
     public ResponseEntity<?> postPerson(@RequestBody PersonPostDTO PersonPostDTO) {
-        personService.postPerson(PersonPostDTO);
+        personService.postEntity(PersonPostDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -33,18 +33,18 @@ public class PersonController {
 
     @DeleteMapping("/person/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
-        personService.deletePerson(id);
+        personService.deleteEntity(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/person/")
     public ResponseEntity<?> putPerson(@RequestBody PersonPutDTO PersonPutDTO) {
-        personService.putPerson(PersonPutDTO);
+        personService.putEntity(PersonPutDTO);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/person/")
     public List<PersonGetDTO> getAllPersons() {
-        return personService.getAllPersons();
+        return personService.getAllEntities();
     }
 }

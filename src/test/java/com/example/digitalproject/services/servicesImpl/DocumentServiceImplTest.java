@@ -33,7 +33,7 @@ class DocumentServiceImplTest {
         when(documentRepository.findById(1L)).thenReturn(Optional.of(document));
         when(documentMapper.entityToGet(document)).thenReturn(documentGetDTO);
 
-        assertEquals(documentGetDTO, documentService.getDocument(1L));
+        assertEquals(documentGetDTO, documentService.getEntity(1L));
         verify(documentRepository).findById(1L);
         verify(documentMapper).entityToGet(document);
     }

@@ -28,27 +28,27 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonGetDTO getPerson(Long id) {
+    public PersonGetDTO getEntity(Long id) {
         return personMapper.entityToGet(personRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND)));
     }
 
     @Override
-    public void postPerson(PersonPostDTO personPostDTO) {
+    public void postEntity(PersonPostDTO personPostDTO) {
         personRepository.save(personMapper.postToEntity(personPostDTO));
     }
 
     @Override
-    public void deletePerson(Long id) {
+    public void deleteEntity(Long id) {
         personRepository.deleteById(id);
     }
 
     @Override
-    public void putPerson(PersonPutDTO personPutDTO) {
+    public void putEntity(PersonPutDTO personPutDTO) {
         personRepository.save(personMapper.putToEntity(personPutDTO));
     }
 
     @Override
-    public List<PersonGetDTO> getAllPersons() {
-        return personMapper.getAllPersons(personRepository.findAll());
+    public List<PersonGetDTO> getAllEntities() {
+        return personMapper.getAll(personRepository.findAll());
     }
 }

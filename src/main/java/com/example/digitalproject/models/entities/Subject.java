@@ -1,11 +1,11 @@
 package com.example.digitalproject.models.entities;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -13,19 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Person {
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String surname;
-    private String phone;
-    private String number;
     @OneToMany
-    @JoinColumn(name = "person_id")
-    private List<Document> documents;
-    @ManyToMany
-    private List<Subject> subjects;
-    @OneToOne
-    private Job job;
+    @JoinColumn(name = "subject_id")
+    private List<Task> tasks;
 }

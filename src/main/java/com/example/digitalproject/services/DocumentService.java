@@ -6,13 +6,13 @@ import com.example.digitalproject.models.dto.documents.*;
 import java.util.List;
 
 public interface DocumentService {
-    DocumentGetDTO getDocument(Long id);
+    DocumentGetDTO getEntity(Long id);
 
-    void postDocument(DocumentPostDTO DocumentPostDTO);
+    void postEntity(DocumentPostDTO postDTO);
 
-    void deleteDocument(Long id);
+    void deleteEntity(Long id);
 
-    void putDocument(DocumentPutDTO DocumentPutDTO);
+    void putEntity(DocumentPutDTO putDTO);
 
-    List<DocumentGetDTO> getAllDocuments();
+    List<DocumentGetDTO> getAllEntities();
 }

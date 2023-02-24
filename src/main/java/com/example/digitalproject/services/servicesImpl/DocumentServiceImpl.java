@@ -18,27 +18,27 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentMapper documentMapper;
 
     @Override
-    public DocumentGetDTO getDocument(Long id) {
+    public DocumentGetDTO getEntity(Long id) {
         return documentMapper.entityToGet(documentRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND)));
     }
 
     @Override
-    public void postDocument(DocumentPostDTO documentPostDTO) {
+    public void postEntity(DocumentPostDTO documentPostDTO) {
         documentRepository.save(documentMapper.postToEntity(documentPostDTO));
     }
 
     @Override
-    public void deleteDocument(Long id) {
+    public void deleteEntity(Long id) {
         documentRepository.deleteById(id);
     }
 
     @Override
-    public void putDocument(DocumentPutDTO documentPutDTO) {
+    public void putEntity(DocumentPutDTO documentPutDTO) {
         documentRepository.save(documentMapper.putToEntity(documentPutDTO));
     }
 
     @Override
-    public List<DocumentGetDTO> getAllDocuments() {
-        return documentMapper.getAllDocuments(documentRepository.findAll());
+    public List<DocumentGetDTO> getAllEntities() {
+        return documentMapper.getAll(documentRepository.findAll());
     }
 }

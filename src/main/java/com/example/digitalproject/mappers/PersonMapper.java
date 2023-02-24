@@ -10,8 +10,8 @@ import java.util.List;
 @Component
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
-    PersonGetDTO entityToGet(Person person);
-    Person postToEntity(PersonPostDTO personPostDTO);
-    Person putToEntity(PersonPutDTO personPutDTO);
-    List<PersonGetDTO> getAllPersons(List<Person> people);
+    PersonGetDTO entityToGet(Person entity);
+    Person postToEntity(PersonPostDTO postDTO);
+    Person putToEntity(PersonPutDTO putDTO);
+    List<PersonGetDTO> getAll(List<Person> list);
 }

@@ -6,13 +6,13 @@ import com.example.digitalproject.models.dto.jobs.*;
 import java.util.List;
 
 public interface JobService {
-    JobGetDTO getJob(Long id);
+    JobGetDTO getEntity(Long id);
 
-    void postJob(JobPostDTO JobPostDTO);
+    void postEntity(JobPostDTO postDTO);
 
-    void deleteJob(Long id);
+    void deleteEntity(Long id);
 
-    void putJob(JobPutDTO JobPutDTO);
+    void putEntity(JobPutDTO putDTO);
 
-    List<JobGetDTO> getAllJobs();
+    List<JobGetDTO> getAllEntities();
 }

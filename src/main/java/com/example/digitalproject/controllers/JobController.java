@@ -16,29 +16,29 @@ public class JobController {
 
     @GetMapping("/job/{id}")
     public JobGetDTO getJob(@PathVariable Long id) {
-        return jobService.getJob(id);
+        return jobService.getEntity(id);
     }
 
     @PostMapping("/job/")
     public ResponseEntity<?> postJob(@RequestBody JobPostDTO JobPostDTO) {
-        jobService.postJob(JobPostDTO);
+        jobService.postEntity(JobPostDTO);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/job/{id}")
     public ResponseEntity<?> deleteJob(@PathVariable Long id) {
-        jobService.deleteJob(id);
+        jobService.deleteEntity(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/job/")
     public ResponseEntity<?> putJob(@RequestBody JobPutDTO JobPutDTO) {
-        jobService.putJob(JobPutDTO);
+        jobService.putEntity(JobPutDTO);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/job/")
     public List<JobGetDTO> getAllJobs() {
-        return jobService.getAllJobs();
+        return jobService.getAllEntities();
     }
 }

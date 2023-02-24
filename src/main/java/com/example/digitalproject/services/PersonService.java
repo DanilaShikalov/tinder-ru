@@ -5,15 +5,15 @@ import com.example.digitalproject.models.dto.persons.*;
 import java.util.List;
 
 public interface PersonService {
-    PersonGetDTO getPerson(Long id);
+    PersonGetDTO getEntity(Long id);
 
-    void postPerson(PersonPostDTO personPostDTO);
+    void postEntity(PersonPostDTO postDTO);
 
-    void deletePerson(Long id);
+    void deleteEntity(Long id);
 
-    void putPerson(PersonPutDTO personPutDTO);
+    void putEntity(PersonPutDTO putDTO);
 
-    List<PersonGetDTO> getAllPersons();
+    List<PersonGetDTO> getAllEntities();
 
     void addDocumentsToPerson(Long idPerson, Long idsDocument);
 }

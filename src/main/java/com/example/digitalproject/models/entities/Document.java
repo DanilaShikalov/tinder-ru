@@ -4,7 +4,7 @@ package com.example.digitalproject.models.entities;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Data

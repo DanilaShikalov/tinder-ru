@@ -9,6 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class ExceptionAdvice {
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<String> generateNotFoundException(ResponseStatusException ex) {
-        return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
+        return new ResponseEntity<>(ex.getMessage(), ex.getStatusCode());
     }
 }

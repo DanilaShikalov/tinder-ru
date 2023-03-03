@@ -3,7 +3,7 @@ package com.example.digitalproject.models.documents;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Data
 @Document
@@ -13,5 +13,6 @@ import javax.persistence.Id;
 public class AnswerDocument {
     @Id
     private String id;
+    private String nameFile;
     private byte[] bytes;
 }

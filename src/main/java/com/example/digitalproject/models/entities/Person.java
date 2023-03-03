@@ -1,7 +1,6 @@
 package com.example.digitalproject.models.entities;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;

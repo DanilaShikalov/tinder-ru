@@ -7,11 +7,11 @@ import java.util.List;
 public interface AnswerMongoService {
     AnswerDocument getDocument(String id);
 
-    void postDocument(byte[] bytes);
+    void postDocument(byte[] bytes, String fileName);
 
     void deleteDocument(String id);
 
-    void putDocument(byte[] bytes, String id);
+    void putDocument(byte[] bytes, String id, String fileName);
 
     List<AnswerDocument> getAllDocuments();
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 @RestController
 @RequestMapping("api/answers/mongo")
@@ -28,10 +29,9 @@ public class AnswerMongoController {
         return new ResponseEntity<>(answerMongoService.getDocument(id), OK);
     }
 
-    @PostMapping(value = "/answer/", consumes = MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
     public ResponseEntity<?> postAnswer(@RequestParam MultipartFile multipartFile) throws IOException {
-        log.info(Arrays.toString(multipartFile.getBytes()));
-        answerMongoService.postDocument(multipartFile.getBytes());
+        answerMongoService.postDocument(multipartFile.getBytes(), multipartFile.getOriginalFilename());
         return ResponseEntity.ok().build();
     }
 
@@ -41,9 +41,9 @@ public class AnswerMongoController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/answer/")
+    @PutMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
     public ResponseEntity<?> putAnswer(@RequestParam MultipartFile multipartFile, @RequestParam String id) throws IOException {
-        answerMongoService.putDocument(multipartFile.getBytes(), id);
+        answerMongoService.putDocument(multipartFile.getBytes(), id, multipartFile.getOriginalFilename());
         return ResponseEntity.ok().build();
     }
 

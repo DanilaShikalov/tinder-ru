@@ -47,7 +47,7 @@ services:
       POSTGRES_URL: jdbc:postgresql://postgres:5432/school
       POSTGRES_USERNAME: school
       POSTGRES_PASSWORD: root
-      MONGO_HOST: mongo69
+      MONGO_HOST: mongo
       MONGO_PORT: 27017
       MONGO_USERNAME: mongo
       MONGO_PASSWORD: root

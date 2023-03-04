@@ -27,7 +27,7 @@ class DocumentServiceImplTest {
 
     @Test
     void getDocument() {
-        Document document = new Document(1L, "test", "test");
+        Document document = new Document(1L, "test", "test", null);
         DocumentGetDTO documentGetDTO = new DocumentGetDTO(1L, "test", "test");
 
         when(documentRepository.findById(1L)).thenReturn(Optional.of(document));

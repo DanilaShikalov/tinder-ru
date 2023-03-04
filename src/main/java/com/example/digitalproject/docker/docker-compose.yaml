@@ -40,3 +40,23 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
+  app:
+    image: dockermirea/digital-api:1.0
+    container_name: app
+    environment:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/school
+      POSTGRES_USERNAME: school
+      POSTGRES_PASSWORD: root
+      MONGO_HOST: mongo69
+      MONGO_PORT: 27017
+      MONGO_USERNAME: mongo
+      MONGO_PASSWORD: root
+      MONGO_DATABASE: schoolmongo
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+      - mongo-express
+      - pgadmin
+      - postgres
+

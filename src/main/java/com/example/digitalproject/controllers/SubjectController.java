@@ -5,6 +5,7 @@ import com.example.digitalproject.models.dto.subjects.SubjectPostDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectPutDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectWithTasksGetDTO;
 import com.example.digitalproject.services.SubjectService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/subjects")
 @AllArgsConstructor
+@SecurityRequirement(name = "digital-project")
 public class SubjectController {
     private SubjectService subjectService;
 

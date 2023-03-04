@@ -2,6 +2,9 @@ package com.example.digitalproject.controllers;
 
 import com.example.digitalproject.models.documents.AnswerDocument;
 import com.example.digitalproject.services.AnswerMongoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -21,33 +24,40 @@ import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 @RequestMapping("api/answers/mongo")
 @AllArgsConstructor
 @Slf4j
+@SecurityRequirement(name = "digital-project")
+@Tag(name = "AnswerMongo", description = "Контроллер для получения ответов в виде документов")
 public class AnswerMongoController {
     private AnswerMongoService answerMongoService;
 
     @GetMapping("/answer/{id}")
+    @Operation(summary = "Получить документ студента по его id")
     public ResponseEntity<AnswerDocument> getAnswer(@PathVariable String id) {
         return new ResponseEntity<>(answerMongoService.getDocument(id), OK);
     }
 
     @PostMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
+    @Operation(summary = "Создать новый документ студента")
     public ResponseEntity<?> postAnswer(@RequestParam MultipartFile multipartFile) throws IOException {
         answerMongoService.postDocument(multipartFile.getBytes(), multipartFile.getOriginalFilename());
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/answer/{id}")
+    @Operation(summary = "Удалить документ студента по его id")
     public ResponseEntity<?> deleteAnswer(@PathVariable String id) {
         answerMongoService.deleteDocument(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
+    @Operation(summary = "Изменить документ студента по его id")
     public ResponseEntity<?> putAnswer(@RequestParam MultipartFile multipartFile, @RequestParam String id) throws IOException {
         answerMongoService.putDocument(multipartFile.getBytes(), id, multipartFile.getOriginalFilename());
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/answer/")
+    @Operation(summary = "Получить все документы студентов")
     public List<AnswerDocument> getAllAnswers() {
         return answerMongoService.getAllDocuments();
     }

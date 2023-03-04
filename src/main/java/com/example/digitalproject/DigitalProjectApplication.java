@@ -8,18 +8,22 @@ import com.example.digitalproject.models.dto.persons.PersonPostDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectPostDTO;
 import com.example.digitalproject.models.dto.tasks.TaskPostDTO;
 import com.example.digitalproject.services.*;
-import com.example.digitalproject.services.servicesImpl.PersonServiceImpl;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Digital API", version = "1337.228", description = "Educational platform"))
+@SecurityScheme(name = "digital-project", scheme = "bearer", type = SecuritySchemeType.HTTP, bearerFormat = "JWT")
 public class DigitalProjectApplication implements CommandLineRunner {
     @Autowired
     private PersonService personService;

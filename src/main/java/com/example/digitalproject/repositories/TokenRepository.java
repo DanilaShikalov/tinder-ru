@@ -1,6 +1,7 @@
 package com.example.digitalproject.repositories;
 
 import com.example.digitalproject.models.security.Token;
+import com.example.digitalproject.models.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +13,6 @@ public interface TokenRepository extends JpaRepository<Token, Long> {
     List<Token> findAllByUserIdAndExpiredFalseAndRevokedFalse(Long id);
 
     Optional<Token> findByToken(String token);
+
+    List<Token> findAllByTokenAndExpiredFalseAndRevokedFalse(String token);
 }

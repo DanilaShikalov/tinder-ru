@@ -23,8 +23,8 @@ public class AnswerMongoServiceImpl implements AnswerMongoService {
     }
 
     @Override
-    public void postDocument(byte[] bytes, String fileName) {
-        AnswerDocument answerDocument = new AnswerDocument(null, fileName, bytes);
+    public void postDocument(byte[] bytes, String fileName, String email) {
+        AnswerDocument answerDocument = new AnswerDocument(null, fileName, bytes, email);
         answerMongoRepository.save(answerDocument);
     }
 
@@ -34,8 +34,8 @@ public class AnswerMongoServiceImpl implements AnswerMongoService {
     }
 
     @Override
-    public void putDocument(byte[] bytes, String id, String fileName) {
-        AnswerDocument answerDocument = new AnswerDocument(id, fileName, bytes);
+    public void putDocument(byte[] bytes, String id, String fileName, String email) {
+        AnswerDocument answerDocument = new AnswerDocument(id, fileName, bytes, email);
         answerMongoRepository.save(answerDocument);
     }
 

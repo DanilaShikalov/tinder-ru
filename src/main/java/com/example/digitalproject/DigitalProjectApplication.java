@@ -7,6 +7,7 @@ import com.example.digitalproject.models.dto.jobs.JobPostDTO;
 import com.example.digitalproject.models.dto.persons.PersonPostDTO;
 import com.example.digitalproject.models.dto.subjects.SubjectPostDTO;
 import com.example.digitalproject.models.dto.tasks.TaskPostDTO;
+import com.example.digitalproject.models.security.RegisterRequest;
 import com.example.digitalproject.services.*;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -40,6 +41,9 @@ public class DigitalProjectApplication implements CommandLineRunner {
     @Autowired
     private GradeService gradeService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     public static void main(String[] args) {
         SpringApplication.run(DigitalProjectApplication.class, args);
     }
@@ -49,9 +53,14 @@ public class DigitalProjectApplication implements CommandLineRunner {
         jobService.postEntity(new JobPostDTO("учитель", 60_000L, List.of("учить", "убирать")));
         jobService.postEntity(new JobPostDTO("уборщик", 20_000L, List.of("убирать", "выкидывать мусор")));
 
-        personService.postEntity(new PersonPostDTO("Петя", "Пупкин", "88005553535", "хз что это"), 1L);
-        personService.postEntity(new PersonPostDTO("Даша", "Попова", "342567", "цпцпц"), 2L);
-        personService.postEntity(new PersonPostDTO("Бывшая", "Бывшая", "зачем знать", "лох"), 2L);
+        authenticationService.register(new RegisterRequest("a", "a", "a", "a"));
+        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g2@gmail.gog", "qwerty123"));
+        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g3@gmail.gog", "qwerty123"));
+
+
+        personService.postEntity(new PersonPostDTO("Петя", "Пупкин", "88005553535", "хз что это"), 1L, 1L);
+        personService.postEntity(new PersonPostDTO("Даша", "Попова", "342567", "цпцпц"), 2L, 2L);
+        personService.postEntity(new PersonPostDTO("Бывшая", "Бывшая", "зачем знать", "лох"), 2L, 3L);
 
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 1L);
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 2L);

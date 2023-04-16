@@ -1,5 +1,6 @@
 package com.example.digitalproject.models.security;
 
+import com.example.digitalproject.models.entities.Person;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

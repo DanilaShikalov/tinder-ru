@@ -20,6 +20,6 @@ public class ExceptionAdvice {
                 .description(ex.getReason())
                 .date(LocalDateTime.now())
                 .build();
-        return new ResponseEntity<>(errorDTO, CONFLICT);
+        return new ResponseEntity<>(errorDTO, ex.getStatusCode());
     }
 }

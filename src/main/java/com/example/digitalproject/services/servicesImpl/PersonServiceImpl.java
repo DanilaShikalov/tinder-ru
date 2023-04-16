@@ -3,10 +3,7 @@ package com.example.digitalproject.services.servicesImpl;
 import com.example.digitalproject.mappers.PersonMapper;
 import com.example.digitalproject.models.dto.persons.*;
 import com.example.digitalproject.models.entities.Person;
-import com.example.digitalproject.repositories.DocumentRepository;
-import com.example.digitalproject.repositories.JobRepository;
-import com.example.digitalproject.repositories.PersonRepository;
-import com.example.digitalproject.repositories.SubjectRepository;
+import com.example.digitalproject.repositories.*;
 import com.example.digitalproject.services.PersonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +20,9 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
     private PersonMapper personMapper;
-    private DocumentRepository documentRepository;
     private JobRepository jobRepository;
     private SubjectRepository subjectRepository;
+    private UserRepository userRepository;
 
     @Override
     public void addSubjectsToPerson(Long idPerson, Long idSubject) {
@@ -35,14 +32,21 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonGetDTO getPerson(String token) {
+        List<Person> list = personRepository.getPersonByToken(token);
+        return personMapper.entityToGet(list.get(0));
+    }
+
+    @Override
     public PersonGetDTO getEntity(Long id) {
         return personMapper.entityToGet(personRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND)));
     }
 
     @Override
-    public void postEntity(PersonPostDTO personPostDTO, Long idJob) {
+    public void postEntity(PersonPostDTO personPostDTO, Long idJob, Long idUser) {
         Person person = personMapper.postToEntity(personPostDTO);
         person.setJob(jobRepository.findById(idJob).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Нет такого job")));
+        person.setUser(userRepository.findById(idUser).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Not found user")));
         personRepository.save(person);
     }
 

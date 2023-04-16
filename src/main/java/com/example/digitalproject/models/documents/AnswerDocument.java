@@ -15,4 +15,6 @@ public class AnswerDocument {
     private String id;
     private String nameFile;
     private byte[] bytes;
+
+    private String email;
 }

@@ -1,5 +1,6 @@
 package com.example.digitalproject.models.entities;
 
+import com.example.digitalproject.models.security.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,4 +27,8 @@ public class Person {
     private List<Subject> subjects;
     @OneToOne(fetch = FetchType.EAGER)
     private Job job;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -3,10 +3,13 @@ package com.example.digitalproject.services.servicesImpl;
 import com.example.digitalproject.mappers.PersonMapper;
 import com.example.digitalproject.models.dto.persons.*;
 import com.example.digitalproject.models.entities.Person;
+import com.example.digitalproject.models.security.User;
 import com.example.digitalproject.repositories.*;
+import com.example.digitalproject.services.AuthenticationService;
 import com.example.digitalproject.services.PersonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +26,8 @@ public class PersonServiceImpl implements PersonService {
     private JobRepository jobRepository;
     private SubjectRepository subjectRepository;
     private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private AuthenticationService authenticationService;
 
     @Override
     public void addSubjectsToPerson(Long idPerson, Long idSubject) {
@@ -35,6 +40,28 @@ public class PersonServiceImpl implements PersonService {
     public PersonGetDTO getPerson(String token) {
         List<Person> list = personRepository.getPersonByToken(token);
         return personMapper.entityToGet(list.get(0));
+    }
+
+    @Override
+    public void putPersonEmail(String email, String token) {
+        User user = authenticationService.getUserByToken(token);
+        user.setEmail(email);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void putPersonPassword(String password, String token) {
+        User user = authenticationService.getUserByToken(token);
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void putPersonPhone(String phone, String token) {
+        Person person = personRepository.getPersonByToken(token).get(0);
+        person.setPhone(phone);
+        person.setNumber(phone);
+        personRepository.save(person);
     }
 
     @Override

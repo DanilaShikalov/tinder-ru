@@ -7,6 +7,7 @@ import com.example.digitalproject.services.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +68,36 @@ public class PersonController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/person/email")
+    @Operation(description = "Изменить почту пользователя")
+    public void putPersonEmail(@RequestParam String email, @RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        personService.putPersonEmail(email, list.get(0).substring("Bearer ".length()));
+    }
+
+    @PutMapping("/person/password")
+    @Operation(description = "Изменить почту пользователя")
+    public void putPersonPass(@RequestParam String password, @RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        personService.putPersonPassword(password, list.get(0).substring("Bearer ".length()));
+    }
+
+    @PutMapping("/person/phone")
+    @Operation(description = "Изменить почту пользователя")
+    public void putPersonPhone(@RequestParam String phone, @RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        personService.putPersonPhone(phone, list.get(0).substring("Bearer ".length()));
+    }
+
     @GetMapping("/person/")
     @Operation(description = "Получить всех пользователей")
     public List<PersonGetDTO> getAllPersons() {
@@ -81,16 +112,4 @@ public class PersonController {
         }
         return ResponseEntity.ok(personService.getPerson(list.get(0).substring("Bearer ".length())));
     }
-
-//    @PostMapping(value = "/document/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
-//    @Operation(summary = "Создать новый документ сотрудника")
-//    public ResponseEntity<?> postAnswer(@RequestParam MultipartFile multipartFile, @RequestHeader HttpHeaders token) throws IOException {
-//        List<String> list = token.get("Authorization");
-//        if (list == null || list.isEmpty()) {
-//            throw new ResponseStatusException(NOT_FOUND, "Error");
-//        }
-//        String email = authenticationService.info(list.get(0).substring("Bearer ".length())).getEmail();
-//        documentMongoService.postDocument(multipartFile.getBytes(), multipartFile.getOriginalFilename(), email);
-//        return ResponseEntity.ok().build();
-//    }
 }

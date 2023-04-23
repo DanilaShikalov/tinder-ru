@@ -18,4 +18,10 @@ public interface PersonService {
     void addSubjectsToPerson(Long idPerson, Long idSubject);
 
     PersonGetDTO getPerson(String token);
+
+    void putPersonEmail(String email, String token);
+
+    void putPersonPassword(String password, String token);
+
+    void putPersonPhone(String phone, String token);
 }

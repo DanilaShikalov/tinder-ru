@@ -1,15 +1,20 @@
 package com.example.digitalproject.controllers;
 
 import com.example.digitalproject.models.dto.jobs.*;
+import com.example.digitalproject.repositories.PersonRepository;
 import com.example.digitalproject.services.JobService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("api/jobs")
@@ -43,6 +48,17 @@ public class JobController {
     @Operation(description = "Изменить позицию по её id")
     public ResponseEntity<?> putJob(@RequestBody JobPutDTO jobPutDTO, @RequestParam Long id) {
         jobService.putEntity(jobPutDTO, id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/job/person")
+    @Operation(description = "Изменить позицию")
+    public ResponseEntity<?> putJobPerson(@RequestParam String job, @RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        jobService.putJobPerson(job, list.get(0).substring("Bearer ".length()));
         return ResponseEntity.ok().build();
     }
 

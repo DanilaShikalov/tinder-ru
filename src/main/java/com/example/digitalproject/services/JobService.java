@@ -15,4 +15,6 @@ public interface JobService {
     void putEntity(JobPutDTO putDTO, Long id);
 
     List<JobGetDTO> getAllEntities();
+
+    void putJobPerson(String job, String token);
 }

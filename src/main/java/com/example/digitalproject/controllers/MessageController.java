@@ -26,8 +26,12 @@ public class MessageController {
 
     @GetMapping("/message/")
     @Operation(description = "Получить все сообщения")
-    public ResponseEntity<List<MessageGetDTO>> getAllJobs() {
-        return ResponseEntity.ok(messageService.getAllMessages());
+    public ResponseEntity<List<MessageGetDTO>> getAllJobs(@RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        return ResponseEntity.ok(messageService.getAllMessages(list.get(0).substring("Bearer ".length())));
     }
 
     @PostMapping("/message/")

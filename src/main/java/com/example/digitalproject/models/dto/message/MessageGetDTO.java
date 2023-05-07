@@ -18,4 +18,5 @@ public class MessageGetDTO {
     private String message;
     private LocalDateTime date;
     private PersonGetDTO person;
+    private boolean statusMember;
 }

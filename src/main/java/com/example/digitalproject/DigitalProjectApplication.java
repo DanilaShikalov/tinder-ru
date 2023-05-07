@@ -53,7 +53,7 @@ public class DigitalProjectApplication implements CommandLineRunner {
         jobService.postEntity(new JobPostDTO("уборщик", 20_000L, List.of("убирать", "выкидывать мусор")));
 
         authenticationService.register(new RegisterRequest("a", "a", "a", "a"));
-        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g2@gmail.gog", "qwerty123"));
+        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "b", "b"));
         authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g3@gmail.gog", "qwerty123"));
 
 

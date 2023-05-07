@@ -112,4 +112,14 @@ public class PersonController {
         }
         return ResponseEntity.ok(personService.getPerson(list.get(0).substring("Bearer ".length())));
     }
+
+    @GetMapping("/get/fullinfo")
+    @Operation(description = "Получить полную информацию о пользователе")
+    public ResponseEntity<PersonFullInfoGetDTO> getFullInfo(@RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        return ResponseEntity.ok(personService.getFullInfo(list.get(0).substring("Bearer ".length())));
+    }
 }

@@ -24,4 +24,6 @@ public interface PersonService {
     void putPersonPassword(String password, String token);
 
     void putPersonPhone(String phone, String token);
+
+    PersonFullInfoGetDTO getFullInfo(String token);
 }

@@ -65,6 +65,21 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonFullInfoGetDTO getFullInfo(String token) {
+        Person person = personRepository.getPersonByToken(token).get(0);
+        PersonFullInfoGetDTO personFullInfoGetDTO = PersonFullInfoGetDTO.builder()
+                .name(person.getName())
+                .surname(person.getSurname())
+                .phone(person.getPhone())
+                .email(person.getUser().getEmail())
+                .salary(person.getJob().getSalary())
+                .position(person.getJob().getTitle())
+                .rating("4.7")
+                .build();
+        return personFullInfoGetDTO;
+    }
+
+    @Override
     public PersonGetDTO getEntity(Long id) {
         return personMapper.entityToGet(personRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND)));
     }

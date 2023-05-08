@@ -1,8 +1,8 @@
 package com.example.digitalproject.controllers;
 
+import com.example.digitalproject.models.documents.DocumentDocument;
 import com.example.digitalproject.services.AuthenticationService;
 import com.example.digitalproject.services.DocumentMongoService;
-import com.example.digitalproject.services.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
@@ -39,5 +39,15 @@ public class DocumentMongoController {
         documentMongoService.postDocument(multipartFile.getBytes(), multipartFile.getOriginalFilename(),
                 authenticationService.info(list.get(0).substring("Bearer ".length())).getEmail(), list.get(0).substring("Bearer ".length()));
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getall/")
+    @Operation(description = "Получить все документы по токену")
+    public ResponseEntity<List<DocumentDocument>> getAllDocumentsByToken(@RequestHeader HttpHeaders token) {
+        List<String> list = token.get("Authorization");
+        if (list == null || list.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Error");
+        }
+        return ResponseEntity.ok(documentMongoService.getAllDocumentsByToken(list.get(0).substring("Bearer ".length())));
     }
 }

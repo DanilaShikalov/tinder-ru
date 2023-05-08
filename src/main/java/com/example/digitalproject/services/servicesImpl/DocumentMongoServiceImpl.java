@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -38,6 +39,17 @@ public class DocumentMongoServiceImpl implements DocumentMongoService {
 
         Document document = new Document(null, "Документ", documentDocument.getId(), person);
         documentRepository.save(document);
+    }
+
+    @Override
+    public List<DocumentDocument> getAllDocumentsByToken(String token) {
+        Person person = personRepository.getPersonByToken(token).get(0);
+        List<DocumentDocument> result = new ArrayList<>();
+        person.getDocuments().forEach(x -> {
+            result.add(documentMongoRepository.findById(x.getDocumentMongoId()).orElseThrow(
+                    () -> new ResponseStatusException(NOT_FOUND, "Document not found")));
+        });
+        return result;
     }
 
     @Override

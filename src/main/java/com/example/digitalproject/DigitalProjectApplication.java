@@ -61,7 +61,6 @@ public class DigitalProjectApplication implements CommandLineRunner {
         personService.postEntity(new PersonPostDTO("Даша", "Попова", "342567", "цпцпц"), 2L, 2L);
         personService.postEntity(new PersonPostDTO("Бывшая", "Бывшая", "зачем знать", "лох"), 2L, 3L);
 
-        documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 1L);
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 2L);
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 3L);
         documentService.postEntity(new DocumentPostDTO("сертификат шлюхи", "спид"), 3L);

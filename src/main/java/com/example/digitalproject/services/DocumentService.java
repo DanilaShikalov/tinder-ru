@@ -15,4 +15,6 @@ public interface DocumentService {
     void putEntity(DocumentPutDTO putDTO, Long id);
 
     List<DocumentGetDTO> getAllEntities();
+
+
 }

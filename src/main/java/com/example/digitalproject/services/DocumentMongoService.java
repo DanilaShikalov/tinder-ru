@@ -15,4 +15,6 @@ public interface DocumentMongoService {
     void putDocument(byte[] bytes, String id, String fileName, String email);
 
     List<DocumentDocument> getAllDocuments();
+
+    List<DocumentDocument> getAllDocumentsByToken(String token);
 }

@@ -1,7 +1,5 @@
 package com.example.digitalproject.models.dto.answers;
 
-import com.example.digitalproject.models.dto.grades.GradeGetDTO;
-import com.example.digitalproject.models.dto.persons.PersonGetDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

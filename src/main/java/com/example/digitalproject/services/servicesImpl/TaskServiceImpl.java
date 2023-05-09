@@ -2,6 +2,7 @@ package com.example.digitalproject.services.servicesImpl;
 
 import com.example.digitalproject.mappers.TaskMapper;
 import com.example.digitalproject.models.dto.tasks.*;
+import com.example.digitalproject.models.entities.Subject;
 import com.example.digitalproject.models.entities.Task;
 import com.example.digitalproject.repositories.SubjectRepository;
 import com.example.digitalproject.repositories.TaskRepository;
@@ -31,6 +32,12 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskMapper.postToEntity(taskPostDTO);
         task.setSubject(subjectRepository.findById(idSubject).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Subject не найден")));
         taskRepository.save(task);
+    }
+
+    @Override
+    public List<TaskGetDTO> getTasksBySubject(String subject) {
+        Subject subjectEntity = subjectRepository.findFirstByName(subject);
+        return taskMapper.getAll(subjectEntity.getTasks());
     }
 
     @Override

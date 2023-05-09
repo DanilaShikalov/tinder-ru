@@ -14,4 +14,6 @@ public interface GradeService {
     void putEntity(GradePutDTO putDTO, Long id);
 
     List<GradeGetDTO> getAllEntities();
+
+    void setGradeBySubjectAndTaskAndNameAndSurnme(String subject, String task, String name, String surname, String grade);
 }

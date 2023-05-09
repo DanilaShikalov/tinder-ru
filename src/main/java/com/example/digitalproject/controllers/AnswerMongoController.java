@@ -38,6 +38,7 @@ public class AnswerMongoController {
     @PostMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
     @Operation(summary = "Создать новый документ студента")
     public ResponseEntity<?> postAnswer(@RequestParam MultipartFile multipartFile, @RequestParam String email) throws IOException {
+        log.info(Arrays.toString(multipartFile.getBytes()));
         answerMongoService.postDocument(multipartFile.getBytes(), multipartFile.getOriginalFilename(), email);
         return ResponseEntity.ok().build();
     }
@@ -52,6 +53,7 @@ public class AnswerMongoController {
     @PutMapping(value = "/answer/", consumes = {MULTIPART_FORM_DATA_VALUE, TEXT_PLAIN_VALUE})
     @Operation(summary = "Изменить документ студента по его id")
     public ResponseEntity<?> putAnswer(@RequestParam MultipartFile multipartFile, @RequestParam String id, @RequestParam String email) throws IOException {
+        log.info(Arrays.toString(multipartFile.getBytes()));
         answerMongoService.putDocument(multipartFile.getBytes(), id, multipartFile.getOriginalFilename(), email);
         return ResponseEntity.ok().build();
     }

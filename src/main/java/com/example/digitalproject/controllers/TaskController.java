@@ -45,4 +45,9 @@ public class TaskController {
     public List<TaskGetDTO> getAllTasks() {
         return taskService.getAllEntities();
     }
+
+    @GetMapping("/tasks/by/subject/")
+    public ResponseEntity<List<TaskGetDTO>> getTasksBySubject(@RequestParam String subject) {
+        return ResponseEntity.ok(taskService.getTasksBySubject(subject));
+    }
 }

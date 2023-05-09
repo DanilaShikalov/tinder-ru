@@ -19,7 +19,7 @@ public class Answer {
     private Long id;
     private LocalDate date;
     private String mongoId;
-    @OneToOne
+    @ManyToOne
     private Person person;
     @OneToOne(mappedBy = "answer")
     private Grade grade;

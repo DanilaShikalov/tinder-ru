@@ -34,6 +34,14 @@ public class GradeController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/grade/by/name/")
+    @Operation(summary = "Сохранить оценку заданию")
+    public ResponseEntity<?> setGrade(@RequestParam String subject, @RequestParam String task, @RequestParam String name,
+                                      @RequestParam String surname, @RequestParam String grade) {
+        gradeService.setGradeBySubjectAndTaskAndNameAndSurnme(subject, task, name, surname, grade);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/grade/{id}")
     @Operation(description = "Удалить оценку по id")
     public ResponseEntity<?> deleteGrade(@PathVariable Long id) {

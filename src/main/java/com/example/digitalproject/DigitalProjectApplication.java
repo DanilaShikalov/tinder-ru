@@ -57,18 +57,18 @@ public class DigitalProjectApplication implements CommandLineRunner {
         authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g3@gmail.gog", "qwerty123"));
 
 
-        personService.postEntity(new PersonPostDTO("Петя", "Пупкин", "88005553535", "хз что это"), 1L, 1L);
-        personService.postEntity(new PersonPostDTO("Даша", "Попова", "342567", "цпцпц"), 2L, 2L);
-        personService.postEntity(new PersonPostDTO("Бывшая", "Бывшая", "зачем знать", "лох"), 2L, 3L);
+        personService.postEntity(new PersonPostDTO("Petya", "Pupkin", "88005553535", "хз что это"), 1L, 1L);
+        personService.postEntity(new PersonPostDTO("Dasha", "Popova", "342567", "цпцпц"), 2L, 2L);
+        personService.postEntity(new PersonPostDTO("Ex", "Ex", "зачем знать", "лох"), 2L, 3L);
 
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 2L);
         documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 3L);
         documentService.postEntity(new DocumentPostDTO("сертификат шлюхи", "спид"), 3L);
 
-        subjectService.postEntity(new SubjectPostDTO("Матеша"));
-        subjectService.postEntity(new SubjectPostDTO("Химия"));
-        subjectService.postEntity(new SubjectPostDTO("Физика"));
-        subjectService.postEntity(new SubjectPostDTO("Физра"));
+        subjectService.postEntity(new SubjectPostDTO("Math"));
+        subjectService.postEntity(new SubjectPostDTO("Chemistry"));
+        subjectService.postEntity(new SubjectPostDTO("Physic"));
+        subjectService.postEntity(new SubjectPostDTO("Fizra"));
 
         personService.addSubjectsToPerson(1L, 1L);
         personService.addSubjectsToPerson(1L, 2L);
@@ -82,13 +82,13 @@ public class DigitalProjectApplication implements CommandLineRunner {
         personService.addSubjectsToPerson(3L, 3L);
         personService.addSubjectsToPerson(3L, 4L);
 
-        taskService.postEntity(new TaskPostDTO("номера 1-5", LocalDate.now(), LocalDate.now().plusDays(7)), 1L);
-        taskService.postEntity(new TaskPostDTO("лаба 1", LocalDate.now(), LocalDate.now().plusDays(7)), 2L);
-        taskService.postEntity(new TaskPostDTO("номера 1-123", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
-        taskService.postEntity(new TaskPostDTO("принести собаку", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
-        taskService.postEntity(new TaskPostDTO("10000 отжиманий", LocalDate.now(), LocalDate.now().plusDays(7)), 4L);
+        taskService.postEntity(new TaskPostDTO("numbers 1-5", LocalDate.now(), LocalDate.now().plusDays(7)), 1L);
+        taskService.postEntity(new TaskPostDTO("lab 1", LocalDate.now(), LocalDate.now().plusDays(7)), 2L);
+        taskService.postEntity(new TaskPostDTO("numbers 1-123", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
+        taskService.postEntity(new TaskPostDTO("get dog", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
+        taskService.postEntity(new TaskPostDTO("10000 km run", LocalDate.now(), LocalDate.now().plusDays(7)), 4L);
 
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "я не сделал"), 1L, 1L);
+        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "645a68118a93172e85542092"), 1L, 1L);
         answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "вот"), 1L, 3L);
         answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "минус 40 кг"), 2L, 5L);
         answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "я спидозная"), 3L, 4L);

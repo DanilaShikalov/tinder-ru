@@ -15,4 +15,6 @@ public interface TaskService {
     void putEntity(TaskPutDTO putDTO, Long id);
 
     List<TaskGetDTO> getAllEntities();
+
+    List<TaskGetDTO> getTasksBySubject(String subject);
 }

@@ -16,4 +16,10 @@ public interface AnswerService {
     List<AnswerGetDTO> getAllEntities();
 
     List<AnswerDefaultGetDTO> getAllAnswersWithTask();
+
+    List<AnswerWithPersonGetDTO> getAnswersWithPerson(String name, String task);
+
+    AnswerWithGradeGetDTO getAnswerWithGradeByToken(String subject, String task, String token);
+
+    AnswerWithGradeGetDTO getAnswerWithGradeByNameAndSurname(String subject, String task, String name, String surname);
 }

@@ -14,6 +14,6 @@ public interface AnswerMapper {
     Answer postToEntity(AnswerPostDTO postDTO);
     Answer putToEntity(AnswerPutDTO putDTO);
     List<AnswerGetDTO> getAll(List<Answer> list);
-
     List<AnswerDefaultGetDTO> getAllAnswersWithTasks(List<Answer> list);
+    List<AnswerWithPersonGetDTO> getAllAnswersWithPerson(List<Answer> list);
 }

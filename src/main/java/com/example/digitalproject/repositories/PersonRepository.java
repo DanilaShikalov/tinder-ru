@@ -14,4 +14,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query(value = "select distinct p from Person p inner join User u on p.user = u where :token\n" +
             "        in (select t.token from Token t where t.user = u and t.expired = false and t.revoked = false)")
     List<Person> getPersonByToken(@Param("token") String token);
+
+    Person findFirstByNameAndSurname(String name, String surname);
 }

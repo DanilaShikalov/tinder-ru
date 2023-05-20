@@ -14,4 +14,6 @@ public interface AnswerMongoService {
     void putDocument(byte[] bytes, String id, String fileName, String email);
 
     List<AnswerDocument> getAllDocuments();
+
+    void createAnswerByToken(byte[] bytes, String fileName, String token, String subject, String task);
 }

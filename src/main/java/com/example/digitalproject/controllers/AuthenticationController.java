@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,6 +33,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(service.register(request));
     }
+
     @PostMapping("/authenticate")
     @Operation(description = "Войти и получить токен")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
@@ -38,6 +41,7 @@ public class AuthenticationController {
     }
 
     @PutMapping("/update/info")
+    @Operation(description = "Обновить инфу")
     @SecurityRequirement(name = "digital-project")
     public ResponseEntity<?> putInfoUser(@RequestBody PersonSettingsPutDTO putDTO, @RequestHeader HttpHeaders token) {
         List<String> list = token.get("Authorization");

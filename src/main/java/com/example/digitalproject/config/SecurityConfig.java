@@ -29,7 +29,8 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/auth/register", "/api/auth/authenticate","/swagger-ui/**",
-                        "/v3/api-docs/**")
+                        "/v3/api-docs/**" , "/api/auth/page/**", "/api/tinder-ru/**",
+                        "/images/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

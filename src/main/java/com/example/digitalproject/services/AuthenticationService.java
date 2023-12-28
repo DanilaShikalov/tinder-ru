@@ -57,6 +57,8 @@ public class AuthenticationService {
                 .lastname(registerRequest.getLastname())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .photo(registerRequest.getPhoto())
+                .description(registerRequest.getDescription())
                 .role(Role.USER)
                 .build();
         if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {

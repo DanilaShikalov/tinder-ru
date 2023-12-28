@@ -7,15 +7,13 @@ import java.util.List;
 public interface PersonService {
     PersonGetDTO getEntity(Long id);
 
-    void postEntity(PersonPostDTO postDTO, Long idJob, Long idUser);
+    void postEntity(PersonPostDTO postDTO, Long idUser);
 
     void deleteEntity(Long id);
 
     void putEntity(PersonPutDTO putDTO, Long id);
 
     List<PersonGetDTO> getAllEntities();
-
-    void addSubjectsToPerson(Long idPerson, Long idSubject);
 
     PersonGetDTO getPerson(String token);
 

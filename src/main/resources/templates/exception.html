@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка</title>
+</head>
+<body>
+<h1>Ой, пошло что-то не так</h1>
+<p>Что-то пошло не так. Пожалуйста, попробуйте еще раз.</p>
+
+<form th:action="@{/api/tinder-ru/login}" method="get">
+    <input type="submit" value="Вернуться на страницу авторизации">
+</form>
+</body>
+</html>

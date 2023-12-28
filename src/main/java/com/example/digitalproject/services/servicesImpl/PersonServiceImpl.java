@@ -24,17 +24,9 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
     private PersonMapper personMapper;
     private JobRepository jobRepository;
-    private SubjectRepository subjectRepository;
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private AuthenticationService authenticationService;
-
-    @Override
-    public void addSubjectsToPerson(Long idPerson, Long idSubject) {
-        Person person = personRepository.findById(idPerson).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Person не найден"));
-        person.getSubjects().add(subjectRepository.findById(idSubject).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Subject не найден")));
-        personRepository.save(person);
-    }
 
     @Override
     public PersonGetDTO getPerson(String token) {
@@ -85,9 +77,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void postEntity(PersonPostDTO personPostDTO, Long idJob, Long idUser) {
+    public void postEntity(PersonPostDTO personPostDTO, Long idUser) {
         Person person = personMapper.postToEntity(personPostDTO);
-        person.setJob(jobRepository.findById(idJob).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Нет такого job")));
         person.setUser(userRepository.findById(idUser).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Not found user")));
         personRepository.save(person);
     }

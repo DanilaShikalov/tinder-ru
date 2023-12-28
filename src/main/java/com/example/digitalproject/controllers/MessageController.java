@@ -24,24 +24,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class MessageController {
     private MessageService messageService;
 
-    @GetMapping("/message/")
-    @Operation(description = "Получить все сообщения")
-    public ResponseEntity<List<MessageGetDTO>> getAllJobs(@RequestHeader HttpHeaders token) {
-        List<String> list = token.get("Authorization");
-        if (list == null || list.isEmpty()) {
-            throw new ResponseStatusException(NOT_FOUND, "Error");
-        }
-        return ResponseEntity.ok(messageService.getAllMessages(list.get(0).substring("Bearer ".length())));
-    }
-
-    @PostMapping("/message/")
-    @Operation(description = "Создать новое сообщение")
-    public ResponseEntity<?> postMessage(@RequestBody MessagePostDTO messagePostDTO, @RequestHeader HttpHeaders token) {
-        List<String> list = token.get("Authorization");
-        if (list == null || list.isEmpty()) {
-            throw new ResponseStatusException(NOT_FOUND, "Error");
-        }
-        messageService.postMessage(messagePostDTO, list.get(0).substring("Bearer ".length()));
-        return ResponseEntity.ok().build();
-    }
+//    @GetMapping("/message/")
+//    @Operation(description = "Получить все сообщения")
+//    public ResponseEntity<List<MessageGetDTO>> getAllJobs(@RequestHeader HttpHeaders token) {
+//        List<String> list = token.get("Authorization");
+//        if (list == null || list.isEmpty()) {
+//            throw new ResponseStatusException(NOT_FOUND, "Error");
+//        }
+//        return ResponseEntity.ok(messageService.getAllMessages(list.get(0).substring("Bearer ".length())));
+//    }
 }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Дайвинчик</title>
+    <style>
+        body {
+            background-image: url(/images/background.jpg);
+            background-size: 1600px 1500px;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .title {
+            font-size: 36px;
+            margin-top: 50px;
+            color: #FFFFFF;
+        }
+
+        .description {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .photo {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .contacts {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .user {
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 50px; /* Add margin-bottom to create space for the buttons */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">Дайвинчик</h1>
+    <div class="description">
+        <p>Добро пожаловать в Дайвинчик - сервис для поиска пары. Наш алгоритм поможет вам найти идеального партнера.
+            Однако, будьте осторожны, в интернете могут быть мошенники. Мы рекомендуем быть бдительными и проверять
+            информацию о потенциальных партнерах.</p>
+    </div>
+    <div class="buttons">
+        <button class="button" onclick="window.location.href='/api/tinder-ru/main'">Главная</button>
+        <button class="button" onclick="window.location.href='/api/tinder-ru/profile'">Профиль</button>
+        <button class="button" onclick="window.location.href='/api/tinder-ru/chats'">Чаты</button>
+        <button class="button" onclick="window.location.href='/api/tinder-ru/settings'">Настройки</button>
+    </div>
+    <div class="photo">
+        <img th:src="${photo}" alt="Моя картинка">
+    </div>
+    <div class="contacts">
+        <p>Контакты</p>
+        <p>ул. Вернандского 78, МИРЭА Корпарейтид</p>
+    </div>
+</div>
+</body>
+</html>

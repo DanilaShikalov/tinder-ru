@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+    <style>
+        body {
+            background-image: url(/images/background.jpg);
+            background-size: 1600px 1500px;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        label {
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .photo {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .contacts {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<h1>Профиль пользователя</h1>
+<div>
+    <label for="firstName">Имя:</label>
+    <span id="firstName" th:text="${firstName}" style="display: block;"></span>
+</div>
+<div>
+    <label for="lastName">Фамилия:</label>
+    <span id="lastName" th:text="${lastName}" style="display: block;"></span>
+</div>
+<div>
+    <label for="description">Описание:</label>
+    <span id="description" th:text="${description}" style="display: block;"></span>
+</div>
+<div>
+    <label for="photo">Фото:</label>
+    <div class="photo">
+        <img id="photo" th:src="${photoUrl}" alt="Фотография пользователя">
+    </div>
+</div>
+<br>
+<div class="buttons">
+    <button class="button" onclick="window.location.href='/api/tinder-ru/main'">Главная</button>
+</div>
+<div class="contacts">
+    <p>Контакты</p>
+    <p>ул. Вернандского 78, МИРЭА Корпарейтид</p>
+</div>
+</body>
+</html>

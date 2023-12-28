@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Чаты</title>
+    <style>
+        body {
+            background-image: url(/images/background.jpg);
+            background-size: 1600px 1500px;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .image {
+            width: 200px; /* Adjust the width as desired */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+            max-width: 600px; /* Set the maximum width as desired */
+            overflow-wrap: break-word; /* Allow the caption to wrap if it exceeds the maximum width */
+        }
+
+        .contacts {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="buttons">
+        <button class="button" onclick="window.location.href='/api/tinder-ru/main'">Главная</button>
+    </div>
+
+    <div class="image-container">
+        <img class="image" src="/images/without_pair.jpg" alt="Картинка">
+        <p class="caption">О, ну конечно, ты такой особенный, что не можешь найти себе пару. Никто не хочет быть с тобой, потому что ты просто не стоишь их времени. Может быть, тебе стоит просто перестать пытаться и принять свою участь одиночки. Ну, или можешь продолжать искать свою "идеальную половинку", но я уверен, что это будет длиться вечно. В любом случае, мне все равно, так что делай, что хочешь. Я бы просто рекомендовал не тратить свое время на бесполезные попытки найти любовь.</p>
+    </div>
+
+    <div class="contacts">
+        <p>Контакты</p>
+        <p>ул. Вернандского 78, МИРЭА Корпарейтид</p>
+    </div>
+</div>
+</body>
+</html>

@@ -15,4 +15,6 @@ public class MessagePostDTO {
     private String color;
     private String message;
     private LocalDateTime date;
+    private String emailFrom;
+    private String emailTo;
 }

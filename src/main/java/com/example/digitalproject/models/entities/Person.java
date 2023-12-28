@@ -24,11 +24,6 @@ public class Person {
     @JoinColumn(name = "person_id")
     private List<Document> documents;
 
-    @OneToMany(mappedBy = "person")
-    private List<Answer> answers;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Subject> subjects;
     @OneToOne(fetch = FetchType.EAGER)
     private Job job;
 

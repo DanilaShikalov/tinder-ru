@@ -1,6 +1,7 @@
 package com.example.digitalproject.models.entities;
 
 
+import com.example.digitalproject.models.security.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,5 +24,8 @@ public class Message {
     private LocalDateTime date;
 
     @ManyToOne
-    private Person person;
+    private User userFrom;
+
+    @ManyToOne
+    private User userTo;
 }

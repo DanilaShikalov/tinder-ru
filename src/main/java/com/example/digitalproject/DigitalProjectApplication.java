@@ -1,12 +1,11 @@
 package com.example.digitalproject;
 
-import com.example.digitalproject.models.dto.answers.AnswerPostDTO;
 import com.example.digitalproject.models.dto.documents.DocumentPostDTO;
-import com.example.digitalproject.models.dto.grades.GradePostDTO;
 import com.example.digitalproject.models.dto.jobs.JobPostDTO;
+import com.example.digitalproject.models.dto.message.MessagePostDTO;
+import com.example.digitalproject.models.dto.pair.PairPostDTO;
 import com.example.digitalproject.models.dto.persons.PersonPostDTO;
-import com.example.digitalproject.models.dto.subjects.SubjectPostDTO;
-import com.example.digitalproject.models.dto.tasks.TaskPostDTO;
+import com.example.digitalproject.models.entities.Pair;
 import com.example.digitalproject.models.security.RegisterRequest;
 import com.example.digitalproject.services.*;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -18,7 +17,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -28,19 +27,6 @@ public class DigitalProjectApplication implements CommandLineRunner {
     @Autowired
     private PersonService personService;
     @Autowired
-    private SubjectService subjectService;
-    @Autowired
-    private JobService jobService;
-    @Autowired
-    private DocumentService documentService;
-    @Autowired
-    private TaskService taskService;
-    @Autowired
-    private AnswerService answerService;
-    @Autowired
-    private GradeService gradeService;
-
-    @Autowired
     private AuthenticationService authenticationService;
 
     public static void main(String[] args) {
@@ -48,56 +34,71 @@ public class DigitalProjectApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        jobService.postEntity(new JobPostDTO("учитель", 60_000L, List.of("учить", "убирать")));
-        jobService.postEntity(new JobPostDTO("уборщик", 20_000L, List.of("убирать", "выкидывать мусор")));
+    public void run(String... args) {
+        authenticationService.register(new RegisterRequest("Аня", "Иванова", "anya@gmail.com", "123",
+                "/images/photo1.jpg", "Молодая, энергичная и ищу надежного партнера для приключений и счастливых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Настя", "Смирнова", "nastya@gmail.com", "123",
+                "/images/photo2.jpg", "Я люблю путешествовать и открывать новые места. Ищу партнера, с которым смогу делиться приключениями и впечатлениями."));
+        authenticationService.register(new RegisterRequest("Таня", "Кузнецова", "tanya@gmail.com", "123",
+                "/images/photo3.jpg", "Моя страсть - готовить вкусные блюда. Ищу мужчину, который оценит мои кулинарные таланты и поделится со мной любовью к еде."));
+        authenticationService.register(new RegisterRequest("Алена", "Попова", "alena@gmail.com", "123",
+                "/images/photo4.jpg", "Я спортивная и энергичная девушка, ищу партнера, который разделит мою страсть к физическим активностям и здоровому образу жизни."));
+        authenticationService.register(new RegisterRequest("Юля", "Васильева", "julia@gmail.com", "123",
+                "/images/photo5.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Галя", "Петрова", "galya@gmail.com", "123",
+                "/images/photo6.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Альмедрида", "Соколова", "almedrida@gmail.com", "123",
+                "/images/photo7.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Августина", "Михайлова", "avgustina@gmail.com", "123",
+                "/images/photo8.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Василиса", "Новикова", "vasilisa@gmail.com", "123",
+                "/images/photo9.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Трап", "Федорова", "trap@gmail.com", "123",
+                "/images/photo10.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Анджелика", "Морозова", "angjelika@gmail.com", "123",
+                "/images/photo11.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Катя", "Волкова", "katya@gmail.com", "123",
+                "/images/photo12.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Лиза", "Алексеева", "liza@gmail.com", "123",
+                "/images/photo13.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Надежда", "Лебедева", "nadejda@gmail.com", "123",
+                "/images/photo14.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Уля", "Семенова", "ulya@gmail.com", "123",
+                "/images/photo15.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Наташа", "Егорова", "natasha@gmail.com", "123",
+                "/images/photo16.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Люба", "Павлова", "luba@gmail.com", "123",
+                "/images/photo17.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Даша", "Козлова", "dasha@gmail.com", "123",
+                "/images/photo18.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Кристина", "Степанова", "kristina@gmail.com", "123",
+                "/images/photo19.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Герда", "Николаева", "gerda@gmail.com", "123",
+                "/images/photo20.jpg", "Активная и жизнерадостная девушка ищет партнера для веселых приключений и незабываемых моментов вместе."));
+        authenticationService.register(new RegisterRequest("Гига", "Чад", "gigachad@gmail.com", "123",
+                "/images/gigachad.png", "Я идеален."));
 
-        authenticationService.register(new RegisterRequest("a", "a", "a", "a"));
-        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "b", "b"));
-        authenticationService.register(new RegisterRequest("Петя", "Пупкин", "g3@gmail.gog", "qwerty123"));
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 1L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 2L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 3L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 4L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 5L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 6L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 7L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 8L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 9L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 10L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 11L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 12L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 13L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 14L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 15L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 16L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 17L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 18L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 19L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 20L);
+        personService.postEntity(new PersonPostDTO("", "", "", ""), 21L);
 
-
-        personService.postEntity(new PersonPostDTO("Petya", "Pupkin", "88005553535", "хз что это"), 1L, 1L);
-        personService.postEntity(new PersonPostDTO("Dasha", "Popova", "342567", "цпцпц"), 2L, 2L);
-        personService.postEntity(new PersonPostDTO("Ex", "Ex", "зачем знать", "лох"), 2L, 3L);
-
-        documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 2L);
-        documentService.postEntity(new DocumentPostDTO("паспорт", "что-то"), 3L);
-        documentService.postEntity(new DocumentPostDTO("сертификат шлюхи", "спид"), 3L);
-
-        subjectService.postEntity(new SubjectPostDTO("Math"));
-        subjectService.postEntity(new SubjectPostDTO("Chemistry"));
-        subjectService.postEntity(new SubjectPostDTO("Physic"));
-        subjectService.postEntity(new SubjectPostDTO("Fizra"));
-
-        personService.addSubjectsToPerson(1L, 1L);
-        personService.addSubjectsToPerson(1L, 2L);
-        personService.addSubjectsToPerson(1L, 3L);
-
-        personService.addSubjectsToPerson(2L, 1L);
-        personService.addSubjectsToPerson(2L, 4L);
-
-        personService.addSubjectsToPerson(3L, 1L);
-        personService.addSubjectsToPerson(3L, 2L);
-        personService.addSubjectsToPerson(3L, 3L);
-        personService.addSubjectsToPerson(3L, 4L);
-
-        taskService.postEntity(new TaskPostDTO("numbers 1-5", LocalDate.now(), LocalDate.now().plusDays(7)), 1L);
-        taskService.postEntity(new TaskPostDTO("lab 1", LocalDate.now(), LocalDate.now().plusDays(7)), 2L);
-        taskService.postEntity(new TaskPostDTO("numbers 1-123", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
-        taskService.postEntity(new TaskPostDTO("get dog", LocalDate.now(), LocalDate.now().plusDays(7)), 3L);
-        taskService.postEntity(new TaskPostDTO("10000 km run", LocalDate.now(), LocalDate.now().plusDays(7)), 4L);
-
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "645a68118a93172e85542092"), 1L, 1L);
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "вот"), 1L, 3L);
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "минус 40 кг"), 2L, 5L);
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "я спидозная"), 3L, 4L);
-        answerService.postEntity(new AnswerPostDTO(LocalDate.now(), "я кидало"), 3L, 2L);
-
-        gradeService.postEntity(new GradePostDTO("Два", "Эх"), 1L);
-        gradeService.postEntity(new GradePostDTO("Отлично", "Сделано супер"), 2L);
-        gradeService.postEntity(new GradePostDTO("Отлично", "Вау"), 3L);
-        gradeService.postEntity(new GradePostDTO("Ты тупая", "Ты тупая"), 4L);
-        gradeService.postEntity(new GradePostDTO("Лох", "Лох"), 5L);
     }
 }

@@ -42,15 +42,8 @@ public class PersonController {
 
     @PostMapping("/person/")
     @Operation(description = "Получить пользователя по его id")
-    public ResponseEntity<?> postPerson(@RequestBody PersonPostDTO personPostDTO, @RequestParam Long idJob, @RequestParam Long idUser) {
-        personService.postEntity(personPostDTO, idJob, idUser);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/person/addsub")
-    @Operation(description = "Добавить предмет к пользователю")
-    public ResponseEntity<?> addSub(@RequestParam Long idPerson, Long idSubject) {
-        personService.addSubjectsToPerson(idPerson, idSubject);
+    public ResponseEntity<?> postPerson(@RequestBody PersonPostDTO personPostDTO, @RequestParam Long idUser) {
+        personService.postEntity(personPostDTO, idUser);
         return ResponseEntity.ok().build();
     }
 

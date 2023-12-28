@@ -6,7 +6,7 @@ import com.example.digitalproject.models.dto.message.MessagePostDTO;
 import java.util.List;
 
 public interface MessageService {
-    List<MessageGetDTO> getAllMessages(String token);
+    List<MessageGetDTO> getAllMessages(String token, String email2);
 
-    void postMessage(MessagePostDTO messagePostDTO, String token);
+    void postMessage(MessagePostDTO messagePostDTO);
 }

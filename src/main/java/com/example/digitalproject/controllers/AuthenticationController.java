@@ -28,11 +28,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class AuthenticationController {
     private final AuthenticationService service;
 
-    @PostMapping("/register")
-    @Operation(description = "Зарегистрироваться и получить токен")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(service.register(request));
-    }
+//    @PostMapping("/register")
+//    @Operation(description = "Зарегистрироваться и получить токен")
+//    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+//        return ResponseEntity.ok(service.register(request));
+//    }
 
     @PostMapping("/authenticate")
     @Operation(description = "Войти и получить токен")

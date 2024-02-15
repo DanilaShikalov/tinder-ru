@@ -55,7 +55,7 @@ public class PairServiceImpl implements PairService {
                                 pair.getFirst() == x || pair.getSecond() == x))
                 .toList();
         Random random = new Random();
-        if (users.isEmpty()) {
+        if (users.stream().filter(x -> !x.isBanned()).toList().isEmpty()) {
             return null;
         }
         return users.get(random.nextInt(users.size()));

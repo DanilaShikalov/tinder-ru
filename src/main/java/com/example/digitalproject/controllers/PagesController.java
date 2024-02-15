@@ -7,6 +7,7 @@ import com.example.digitalproject.models.dto.pair.PairPostDTO;
 import com.example.digitalproject.models.entities.Person;
 import com.example.digitalproject.models.security.AuthenticationRequest;
 import com.example.digitalproject.models.security.RegisterRequest;
+import com.example.digitalproject.models.security.Role;
 import com.example.digitalproject.models.security.User;
 import com.example.digitalproject.repositories.PersonRepository;
 import com.example.digitalproject.repositories.UserRepository;
@@ -55,6 +56,10 @@ public class PagesController {
                 .build();
         try {
             var auth = authenticationService.authenticate(request);
+            Person person = personRepository.getPersonByToken(auth.getToken()).get(0);
+            if (person.getUser().isBanned()) {
+                return "exception";
+            }
             session.setAttribute("token", auth.getToken());
             User randomPairUser = pairService.getRandomPairUser(auth.getToken());
             if (randomPairUser != null) {
@@ -65,6 +70,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", auth.getToken());
+            if (personRepository.getPersonByToken(auth.getToken()).get(0).getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } catch (Exception e) {
             return "exception";
@@ -85,6 +93,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", token);
+            if (personByToken.get(0).getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } else {
             return "exception";
@@ -108,7 +119,7 @@ public class PagesController {
                 .photo("/images/default_photo.png")
                 .build();
         try {
-            var auth = authenticationService.register(request);
+            var auth = authenticationService.register(request, Role.USER);
             User randomPairUser = pairService.getRandomPairUser(auth.getToken());
             if (randomPairUser != null) {
                 ModelUtils.fillModel(randomPairUser, model);
@@ -118,6 +129,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", auth.getToken());
+            if (personRepository.getPersonByToken(auth.getToken()).get(0).getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } catch (Exception e) {
             return "exception";
@@ -164,6 +178,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", token);
+            if (person.getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } catch (Exception e) {
             return "exception";
@@ -190,6 +207,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", token);
+            if (person.getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } catch (Exception e) {
             return "exception";
@@ -216,6 +236,9 @@ public class PagesController {
                 return "not_found";
             }
             session.setAttribute("token", token);
+            if (person.getUser().getRole().equals(Role.ADMIN)) {
+                return "admin_main";
+            }
             return "main";
         } catch (Exception e) {
             return "exception";
@@ -263,6 +286,31 @@ public class PagesController {
         }
     }
 
+    @GetMapping("/ban-list")
+    public String banPage(HttpSession session, Model model) {
+        String token = (String) session.getAttribute("token");
+        try {
+            var users = authenticationService.getAllUsers();
+            model.addAttribute("users", users);
+            return "admin";
+        } catch (Exception e) {
+            return "exception";
+        }
+    }
+
+    @GetMapping("/baning")
+    public String banPage(HttpSession session, Model model, @RequestParam("email") String email) {
+        String token = (String) session.getAttribute("token");
+        try {
+            authenticationService.banUser(email);
+            var users = authenticationService.getAllUsers();
+            model.addAttribute("users", users);
+            return "admin";
+        } catch (Exception e) {
+            return "exception";
+        }
+    }
+
     @PostMapping("/send-message")
     public String messageRequest(HttpSession session, Model model, @RequestParam("email") String email, @RequestParam("message") String message) {
         String token = (String) session.getAttribute("token");
@@ -276,14 +324,14 @@ public class PagesController {
                     .emailTo(email)
                     .build());
 
-            String messageToGPT = GPTUtils.sendMessageToGPT(message, messageService.getAllMessages(token, email));
-            messageService.postMessage(MessagePostDTO.builder()
-                    .message(messageToGPT)
-                    .color("red")
-                    .date(LocalDateTime.now())
-                    .emailFrom(email)
-                    .emailTo(person.getUser().getEmail())
-                    .build());
+//            String messageToGPT = GPTUtils.sendMessageToGPT(message, messageService.getAllMessages(token, email));
+//            messageService.postMessage(MessagePostDTO.builder()
+//                    .message(messageToGPT)
+//                    .color("red")
+//                    .date(LocalDateTime.now())
+//                    .emailFrom(email)
+//                    .emailTo(person.getUser().getEmail())
+//                    .build());
 
             List<MessageGetDTO> messages = messageService.getAllMessages(token, email);
             model.addAttribute("messages", messages.stream().map(x ->

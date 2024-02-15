@@ -16,4 +16,5 @@ public class RegisterRequest {
     private String password;
     private String photo;
     private String description;
+    private boolean banned;
 }

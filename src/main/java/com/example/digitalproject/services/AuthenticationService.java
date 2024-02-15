@@ -1,6 +1,7 @@
 package com.example.digitalproject.services;
 
 import com.example.digitalproject.config.JwtUtils;
+import com.example.digitalproject.mappers.UserMapper;
 import com.example.digitalproject.models.entities.Person;
 import com.example.digitalproject.models.security.*;
 import com.example.digitalproject.repositories.PersonRepository;
@@ -30,6 +31,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
     private final PersonRepository personRepository;
+    private final UserMapper userMapper;
 
     public User getUserByToken(String token) {
         Optional<Token> tokenEntity = tokenRepository.findByToken(token);
@@ -37,6 +39,12 @@ public class AuthenticationService {
             return tokenEntity.get().getUser();
         }
         throw new ResponseStatusException(NOT_FOUND, "Not found user");
+    }
+
+    public void banUser(String email) {
+        User user = userRepository.findByEmail(email).get();
+        user.setBanned(true);
+        userRepository.save(user);
     }
 
     public void updateUserByToken(String token, String email, String password, String phone) {
@@ -51,7 +59,7 @@ public class AuthenticationService {
         personRepository.save(person);
     }
 
-    public AuthenticationResponse register(RegisterRequest registerRequest) {
+    public AuthenticationResponse register(RegisterRequest registerRequest, Role role) {
         var user = User.builder()
                 .firstname(registerRequest.getFirstname())
                 .lastname(registerRequest.getLastname())
@@ -59,7 +67,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .photo(registerRequest.getPhoto())
                 .description(registerRequest.getDescription())
-                .role(Role.USER)
+                .role(role)
                 .build();
         if (userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             throw new ResponseStatusException(CONFLICT, "This account already exists");
@@ -77,7 +85,7 @@ public class AuthenticationService {
         log.info(token);
         if (!list.isEmpty()) {
             User user = list.get(0).getUser();
-            return new RegisterResponse(user.getFirstname(), user.getLastname(), user.getEmail());
+            return new RegisterResponse(user.getFirstname(), user.getLastname(), user.getEmail(), user.isBanned());
         }
         throw new ResponseStatusException(CONFLICT, "Conflict");
     }
@@ -116,5 +124,9 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public List<RegisterResponse> getAllUsers() {
+        return userMapper.getAll(userRepository.findAll());
     }
 }

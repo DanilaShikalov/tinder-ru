@@ -26,6 +26,7 @@ public class User implements UserDetails {
     private String password;
     private String photo;
     private String description;
+    private boolean banned;
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")

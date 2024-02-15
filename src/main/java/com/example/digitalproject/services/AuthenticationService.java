@@ -73,6 +73,16 @@ public class AuthenticationService {
             throw new ResponseStatusException(CONFLICT, "This account already exists");
         }
         user = userRepository.save(user);
+        var person = Person.builder()
+                .id(null)
+                .name(registerRequest.getFirstname())
+                .surname(registerRequest.getLastname())
+                .documents(null)
+                .job(null)
+                .phone(null)
+                .user(user)
+                .build();
+        personRepository.save(person);
         var jwtToken = jwtUtils.generateToken(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
